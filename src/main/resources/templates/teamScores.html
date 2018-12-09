@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Team Scores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container" th:if= "not ${gameDetails}">
+	<p>No data To display</p>
+</div>
+<div class="container" th:if= "${gameDetails}">
+<table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Away team</th>
+      <th scope="col">Away Score</th>
+      <th scope="col">Home team</th>
+      <th scope="col">Home Score</th>
+    
+      
+    </tr>
+    
+  </thead>
+    	<tr th:each="gameDetail,iterStat : ${gameDetails}" >
+     		<td th:text="${gameDetail.get('id')}">
+     		<td th:text="${gameDetail.get('date')}" >  </td>
+  			<td th:text="${gameDetail.get('time')}" >  </td>
+  			<td th:text="${gameDetail.get('awayTeam')}" >  
+  			<td th:text="${gameDetail.get('awayScore')}" >  
+  			<td th:text="${gameDetail.get('homeTeam')}" >  
+  			<td th:text="${gameDetail.get('homeScore')}" >  
+  			
+  			</td>
+  			
+  		</tr>
+    </table>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

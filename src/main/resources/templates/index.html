@@ -1,0 +1,63 @@
+<!Doctype html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<html xmlns:th="https://www.thymeleaf.org">
+    
+
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <img class="navbar-brand" src="images/image1.jpg" height="68" width="68" alt="SportsWatch">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active"> <a class="nav-link" href="/">Sports Watch <span class="sr-only">(current)</span></a></li>
+   
+      <li class="nav-item active">
+        <a class="nav-link" href="/save">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/FavTeam">Favorite Team</a>
+      </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/teams">All Teams</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/teamScores">Team Scores</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/OverallStandings">Overall Team Standings</a>
+      </li>
+    </ul>
+      </div>
+      <button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-log-out" aria-hidden="true">Log Out</span>
+</button>
+</nav>  
+
+
+  <caption>Your Favorite Teams:</caption>
+
+<table class="table table-bordered table text-center table-dark">
+  
+    <tr>
+      <th>Name</th>
+      <th>Abbreviation</th>
+    </tr>
+    <tr th:each="team :${teams}">
+      <td ><a th:href="@{~/teamprofile?id=}+${team.team_id}" th:text="${team.fav_team_name}" /></td>
+      <td th:text="${team.abbreviation}"></td>
+    </tr>
+</table>
+ 
+   
+</html>

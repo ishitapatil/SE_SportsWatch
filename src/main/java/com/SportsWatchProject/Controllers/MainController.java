@@ -55,7 +55,7 @@ public class MainController {
         
 		return showTeams;
 	}
-	
+	/*
 	//Using objectMapper
 	
 	@GetMapping("/teamprofile")
@@ -80,49 +80,49 @@ public class MainController {
 		
 		
 		
-		/*---------------------------------------*/
+		---------------------------------------
 		
 		
 		
-//		
-//		String url2 = "https://api.mysportsfeeds.com/v1.2/pull/nba/2018-2019-regular/full_game_schedule.json?team=" + teamID;
-//		ArrayList<HashMap<String, String>> gameSc= new ArrayList<HashMap<String, String>>();
-//		ResponseEntity<String> response2 = restTemplate.exchange(url2, HttpMethod.GET, request, String.class);
-//		String str2 = response2.getBody(); 
-//		
-//		
-//		
-//		ObjectMapper mapper2 = new ObjectMapper();
-//		try {
-//			JsonNode root = mapper2.readTree(str2);
-//			System.out.println(str2);
-//			//JsonNode jsonNode1 = actualObj.get("lastUpdatedOn");
-//	        System.out.println(root.get("fullgameschedule").get("lastUpdatedOn").asText());
-//	        System.out.println(root.get("fullgameschedule").get("gameentry").getNodeType());
-//	        JsonNode gameschedules = root.get("fullgameschedule");
-//	        
-////	        if(gameschedules.isArray()) {
-//	        	
-//	        	gameschedules.forEach(gamelog -> {
-//	        		JsonNode game2 = gamelog.get("gameentry");
-//	        		HashMap<String,String> games = new HashMap<String, String>();
-//	        		games.put("id", game2.get("id").asText());
-//	        		games.put("date", game2.get("date").asText());
-//	        		games.put("time", game2.get("time").asText());
-//	        		games.put("awayTeam", game2.get("awayTeam").get("Abbreviation").asText());
-//	        		games.put("Location", game2.get("location").asText());
-//	        		gameSc.add(games);
-//	        		
-//	        	});
-////	        }
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	 
-//		teamInfo.addObject("gameSchedule", gameSc);
 		
-		/*---------------------------------------*/
+		String url2 = "https://api.mysportsfeeds.com/v1.2/pull/nba/2018-2019-regular/full_game_schedule.json?team=" + teamID;
+		ArrayList<HashMap<String, String>> gameSc= new ArrayList<HashMap<String, String>>();
+		ResponseEntity<String> response2 = restTemplate.exchange(url2, HttpMethod.GET, request, String.class);
+		String str2 = response2.getBody(); 
+		
+		
+		
+		ObjectMapper mapper2 = new ObjectMapper();
+		try {
+			JsonNode root = mapper2.readTree(str2);
+			System.out.println(str2);
+			//JsonNode jsonNode1 = actualObj.get("lastUpdatedOn");
+	        System.out.println(root.get("fullgameschedule").get("lastUpdatedOn").asText());
+	        System.out.println(root.get("fullgameschedule").get("gameentry").getNodeType());
+	        JsonNode gameschedules = root.get("fullgameschedule");
+	        
+//	        if(gameschedules.isArray()) {
+	        	
+	        	gameschedules.forEach(gamelog -> {
+	        		JsonNode game2 = gamelog.get("gameentry");
+	        		HashMap<String,String> games = new HashMap<String, String>();
+	        		games.put("id", game2.get("id").asText());
+	        		games.put("date", game2.get("date").asText());
+	        		games.put("time", game2.get("time").asText());
+	        		games.put("awayTeam", game2.get("awayTeam").get("Abbreviation").asText());
+	        		games.put("Location", game2.get("location").asText());
+	        		gameSc.add(games);
+	        		
+	        	});
+//	        }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 
+		teamInfo.addObject("gameSchedule", gameSc);
+	
+		---------------------------------------
 		
 		
 		
@@ -165,7 +165,7 @@ public class MainController {
 	
 	
 	
-	
+*/	
 	
 	
 	
@@ -196,26 +196,44 @@ public class MainController {
 			//JsonNode jsonNode1 = actualObj.get("lastUpdatedOn");
 	        System.out.println(root.get("teamgamelogs").get("lastUpdatedOn").asText());
 	        System.out.println(root.get("teamgamelogs").get("gamelogs").getNodeType());
+	       
+	        
+
 	        JsonNode gamelogs = root.get("teamgamelogs").get("gamelogs");
+	        
+	        HashMap<String,String> teamDetail = new HashMap<String, String>();
+	        JsonNode game2 = gamelogs.get(1).get("team");
+	        System.out.println(game2.get("Name"));
+	        teamDetail.put("Name",game2.get("Name").asText());
+	        teamDetail.put("ID",game2.get("ID").asText());
+	        teamDetail.put("Abb",game2.get("Abbreviation").asText());
+	        
+	        teamInfo.addObject("TeamName", teamDetail);
 	        
 	        if(gamelogs.isArray()) {
 	        	
 	        	gamelogs.forEach(gamelog -> {
 	        		JsonNode game = gamelog.get("game");
+	        		JsonNode game1 = gamelog.get("stats");
+	        		
+	        		
 	        		HashMap<String,String> gameDetail = new HashMap<String, String>();
-	        		gameDetail.put("id", game.get("id").asText());
+	        		gameDetail.put("name",game.get("homeTeam").get("Name").asText());
 	        		gameDetail.put("date", game.get("date").asText());
 	        		gameDetail.put("time", game.get("time").asText());
-	        		gameDetail.put("awayTeam", game.get("awayTeam").get("Abbreviation").asText());
+	        		gameDetail.put("awayTeam", game.get("awayTeam").get("Name").asText());
+	        		gameDetail.put("Wins", game1.get("Wins").get("#text").asText());
+	        		gameDetail.put("Losses", game1.get("Losses").get("#text").asText());
 	        		gameDetails.add(gameDetail);
 	        		
 	        	});
+	  
 	        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 
+		
 		teamInfo.addObject("gameDetails", gameDetails);
 		
         

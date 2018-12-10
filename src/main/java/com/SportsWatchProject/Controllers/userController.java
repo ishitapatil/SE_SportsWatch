@@ -58,18 +58,27 @@ import com.SportsWatchProject.Repository.UserRepository;
 			 @RequestParam("userEmail") String userEmail,
 			 HttpSession session
 			 ) {
-		 if(userRepo.findByName(userName) == null) {
+		 if(userRepo.findByEmail(userEmail) == null) {
 			 User user =new User();
 			 user.setId_fb(Long.parseLong(userID));
 			 user.setName(userName);
 			 user.setEmail(userEmail);
+			 boolean status=true;
+			 user.setStatus(status);
 			 userRepo.save(user);
+			 session.setAttribute("userID", userID);
+			 return new ModelAndView("redirect:/save");
+		 }else {
+			 User u = userRepo.findByEmail(userEmail);
+			 if(!u.isStatus()) {
+				 return new ModelAndView("Error");
+			 }
+				
 		 }
 		 session.setAttribute("userEmail", userEmail);
 		 System.out.println(userID + userName + userEmail);
-		 
-		 session.setAttribute("userID", userID);
-		 return new ModelAndView("redirect:/save");
+		 return new ModelAndView("index");
+		
 	 }
 	 } 
  

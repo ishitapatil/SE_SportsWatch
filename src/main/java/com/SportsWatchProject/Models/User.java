@@ -12,8 +12,16 @@ public class User {
     private long id;
 
     private long id_fb;
-    
-    public long getId_fb() {
+    private boolean status;
+    public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public long getId_fb() {
 		return id_fb;
 	}
 

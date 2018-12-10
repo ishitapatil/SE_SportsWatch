@@ -102,11 +102,12 @@
   the FB.login() function when clicked.
 -->
 
-<!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-button>
+<!-- <fb-login-button  data-auto-logout-button="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
  -->
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>
-
+ 
 <div id="status">
 </div>
 

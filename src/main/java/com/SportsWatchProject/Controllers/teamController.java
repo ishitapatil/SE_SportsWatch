@@ -62,7 +62,11 @@ import org.springframework.web.client.RestTemplate;
 	public ModelAndView renderFav(@RequestParam("teamid") String teamID,@RequestParam("teamabb") String teamabb ,@RequestParam("teamname") String teamName , HttpSession session ) {
 		ModelAndView mmatr = new ModelAndView();
 		TeamsEntity e =new TeamsEntity();
-		String email=session.getAttribute("userEmail").toString();
+		if(session.getAttribute("userEmail")==null) {
+			mmatr.setViewName("redirect:/login");
+			return mmatr;
+		}
+		
 //		List<TeamsEntity> listfav=teamsRepo.findByEmail(email);
 		
 //		if(!listfav.isEmpty() && listfav.contains(e	)) {
@@ -76,7 +80,7 @@ import org.springframework.web.client.RestTemplate;
 			teamsRepo.save(e);
 			System.out.println();
 //		}
-		mmatr.setViewName("index");
+		mmatr.setViewName("redirect:/teams");
 		
 		return mmatr;
 	}

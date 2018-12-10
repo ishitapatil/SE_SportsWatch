@@ -77,7 +77,7 @@ import com.SportsWatchProject.Repository.UserRepository;
 		 }
 		 session.setAttribute("userEmail", userEmail);
 		 System.out.println(userID + userName + userEmail);
-		 return new ModelAndView("index");
+		 return new ModelAndView("redirect:/save");
 		
 	 }
 	 } 

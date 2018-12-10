@@ -7,7 +7,7 @@
     
 
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-   <img class="navbar-brand" src="images/image1.jpg" height="68" width="68" alt="SportsWatch">
+   <img class="navbar-brand" src="images/nba.png" height="68" width="68" alt="SportsWatch">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -20,30 +20,54 @@
       <li class="nav-item active">
         <a class="nav-link" href="/save">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="/FavTeam">Favorite Team</a>
       </li>
-      </li>
+       --></li>
       <li class="nav-item">
         <a class="nav-link" href="/teams">All Teams</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/teamScores">Team Scores</a>
+        <a class="nav-link" href="/teamScores">Today's Team Scores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/AdminLogin">Admin Login</a>
       </li>
       
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/OverallStandings">Overall Team Standings</a>
-      </li>
     </ul>
       </div>
-      <button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-log-out" aria-hidden="true">Log Out</span>
-</button>
+      <button type="button" class="btn btn-primary btn-lg">
+				<a href="/login" style="color:inherit"> Login </a>
+				</button>
 </nav>  
 
+<!--- Image Slider -->
+<div id="slides" class="carousel slide" data-ride="carousel">
+	<ul class="carousel-indicators">
+		<li data-target="#slides" data-slide-to="0" class="active"></li>
+		<li data-target="#slides" data-slide-to="1"></li>
+		<li data-target="#slides" data-slide-to="2"></li>
+	</ul>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="images/nba5.png">
+				
+		</div>
+		<div class="carousel-item">
+			<img src="images/nba4.png">
+			<div  class="carousel-caption">
+				
+				<button type="button" class="btn btn-primary btn-lg">
+				<a href="/login" style="color:inherit"> Login </a>
+				</button>
+			</div>
+		</div>
+		<div class="carousel-item">
+			<img src="images/nba3.png">
+			
+		</div>
+	</div>
+</div>
 
   <caption>Your Favorite Teams:</caption>
 

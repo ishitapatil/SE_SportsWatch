@@ -1,5 +1,8 @@
 package com.SportsWatchProject.Controllers;
 
+import com.SportsWatchProject.Models.Notifications;
+import com.SportsWatchProject.Controllers.NotificationService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -44,11 +47,54 @@ import com.SportsWatchProject.Repository.UserRepository;
  public class userController{
 	 @Autowired
 	 public UserRepository userRepo;
+	 
+	 @Autowired
+		private NotificationService notificationService;
+
 	 @GetMapping(path="/login")
 		public ModelAndView getHomepage() {
 		 ModelAndView demo = new ModelAndView("login");
 			return demo;
 		
+		}
+	 @GetMapping("/error")
+	 public ModelAndView showNotifications() {
+		 return new ModelAndView("Error");
+	 }
+	 @GetMapping("/showNotifications")
+		public ModelAndView showNotifications(HttpServletRequest request,@RequestParam("uemail") String userEmail) {
+{
+
+			ModelAndView modelAndView = new ModelAndView();
+			HttpSession session = request.getSession();
+			String username = (String) session.getAttribute("name");
+			User u = userRepo.findByEmail(userEmail);
+			
+			List<Notifications> received = notificationService.getNotificationsForUser(u.getId());
+
+			List<Notifications> toBeDisplayed = new ArrayList<>();
+
+			for (int i=0;i<received.size();i++){
+				if(!received.get(i).isVisited()){
+					toBeDisplayed.add(received.get(i));
+				}
+			}
+
+			modelAndView.addObject("list",toBeDisplayed);
+			modelAndView.setViewName("notifications");
+			return modelAndView;
+
+		}
+		
+		
+	}
+
+	 @GetMapping(path="/logout")
+		public String logout(HttpSession session) 
+	 {
+		session.invalidate();
+		return "index";
+			
 		}
 	 
 	 @PostMapping("/login")
@@ -58,6 +104,7 @@ import com.SportsWatchProject.Repository.UserRepository;
 			 @RequestParam("userEmail") String userEmail,
 			 HttpSession session
 			 ) {
+		 System.out.println("here");
 		 if(userRepo.findByEmail(userEmail) == null) {
 			 User user =new User();
 			 user.setId_fb(Long.parseLong(userID));
@@ -66,17 +113,17 @@ import com.SportsWatchProject.Repository.UserRepository;
 			 boolean status=true;
 			 user.setStatus(status);
 			 userRepo.save(user);
-			 session.setAttribute("userID", userID);
-			 return new ModelAndView("redirect:/save");
+			
 		 }else {
 			 User u = userRepo.findByEmail(userEmail);
 			 if(!u.isStatus()) {
-				 return new ModelAndView("Error");
+			 return new ModelAndView("redirect:/save");
 			 }
-				
+			 
 		 }
-		 session.setAttribute("userEmail", userEmail);
+		 session.setAttribute("email", userEmail);
 		 System.out.println(userID + userName + userEmail);
+//		 return "index";
 		 return new ModelAndView("redirect:/save");
 		
 	 }

@@ -19,6 +19,7 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
+      
       testAPI();
     } else {
       // The person is not logged into your app or we are unable to tell.
@@ -105,9 +106,8 @@
 <!-- <fb-login-button  data-auto-logout-button="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>
  -->
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+<fb:login-button  scope="public_profile,email" onlogin="checkLoginState();" data-auto-logout-link="true">
 </fb:login-button>
- 
 <div id="status">
 </div>
 

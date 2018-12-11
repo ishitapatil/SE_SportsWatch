@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
   
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active"> <a class="nav-link" href="/">Sports Watch <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"> <a class="nav-link" href="/save">Sports Watch <span class="sr-only">(current)</span></a></li>
    
       <li class="nav-item active">
         <a class="nav-link" href="/save">Home <span class="sr-only">(current)</span></a>
@@ -35,6 +35,9 @@
       <button type="button" class="btn btn-primary btn-lg">
 				<a href="/login" style="color:inherit"> Login </a>
 				</button>
+		<button type="button" class="btn btn-primary btn-lg">
+				<a href="/logout" style="color:inherit"> Logout </a>
+				</button>
 </nav>  
 
     <title>Team Info</title>
@@ -42,9 +45,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Team Profile</h1>
-<b>Team Name:</b><p th:text="${TeamName.Name}"></p>
-<img src ="@{images(name=${TeamName.Abb})}" ></img>
+<!-- <h3>Team Profile</h3>
+ -->
+ <b></b> <h1 th:text="${TeamName.Name}"></h1>
+ 
+<img th:src	 ="@{${'/images/' + TeamName.Abb + '.png'}}" height="85" width="88"></img>
 <form th:action="@{~/addToFav}" method="POST">
   			<input type="hidden" th:value="${TeamName.Abb}" th:name="teamabb"/>
   			<input type="hidden" th:value="${TeamName.ID}" th:name="teamid"/>

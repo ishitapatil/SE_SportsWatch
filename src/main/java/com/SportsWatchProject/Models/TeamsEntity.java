@@ -17,6 +17,7 @@ public class TeamsEntity {
 	private String email;
 	private String abbreviation;
 	private String fav_team_name;
+
 	private long team_id;
 	 public long getTeam_id() {
 		return team_id;

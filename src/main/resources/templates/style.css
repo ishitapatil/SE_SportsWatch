@@ -1,14 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 
 
 
 
 
-
-
-
-
+{
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
@@ -91,4 +87,4 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 
 
-
+}

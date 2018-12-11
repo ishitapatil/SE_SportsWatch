@@ -1,5 +1,8 @@
 package com.SportsWatchProject.Controllers;
 
+import com.SportsWatchProject.Controllers.NotificationService;
+import com.SportsWatchProject.Models.User;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +10,9 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
@@ -23,9 +29,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.SportsWatchProject.Repository.UserRepository;
 @Controller
 public class MainController {
+	
+	@Autowired
+	 public UserRepository userRepo;
+	 
+	@Autowired
+	private NotificationService notificationService;
+
+
 	
 	
 	//Using PoJo Classes
@@ -39,7 +53,7 @@ public class MainController {
 		//OverallTeamStandings
 		
 		//Encode Username and Password
-        String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:DCtrue@03".getBytes());
+        String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:testing1234".getBytes());
         // TOKEN:PASS
         //Add headers
 		HttpHeaders headers = new HttpHeaders();
@@ -64,12 +78,16 @@ public class MainController {
 	
 	@GetMapping("/team")
 	public ModelAndView getTeamInfo(
-			@RequestParam("id") String teamID 
-			) {
+			@RequestParam("id") String teamID ,
+			HttpSession session) {
+		if(session.getAttribute("email")==null) {
+			ModelAndView mmatr= new ModelAndView("redirect:/login");
+			return mmatr;
+		}
 		ModelAndView teamInfo = new ModelAndView("teamInfo");
 		ArrayList<HashMap<String, String>> gameDetails = new ArrayList<HashMap<String, String>>();
 		String url = "https://api.mysportsfeeds.com/v1.2/pull/nba/2018-2019-regular/team_gamelogs.json?team=" + teamID;
-		String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:DCtrue@03".getBytes());
+		String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:testing1234".getBytes());
         
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -155,8 +173,17 @@ public class MainController {
 		/*---------------------------------------------------------------*/
 		teamInfo.addObject("gameSchedules",gameSchedules);
 		teamInfo.addObject("gameDetails", gameDetails);
+//
+//		Update update = new Update();
+//		User u = userRepo.findByEmail(String email);
+//        update.setUserId(u.getId());
+//        update.;
+//        MainController.savePosts(update);
+
+
 		
-        
+		//sendNotificationToUserPost(update,u,"New Update for Wins/Losses "+u.getEmail(),false);
+
 		return teamInfo;
 	}
 
@@ -164,7 +191,7 @@ public class MainController {
 @Controller
 public class teamScoresController {
 	
-		@GetMapping("/teamScores")
+	@GetMapping("/teamScores")
 	public ModelAndView getTeamScores(
 						) {
 		ModelAndView teamInfo = new ModelAndView("teamScores");
@@ -177,7 +204,7 @@ public class teamScoresController {
 		
 		String url = "https://api.mysportsfeeds.com/v1.2/pull/nba/2018-2019-regular/scoreboard.json?fordate="+datetoday;
 		System.out.println(url);
-		String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:DCtrue@03".getBytes());
+		String encoding = Base64.getEncoder().encodeToString("d5800231-5f79-4e80-972f-50e95f:testing1234".getBytes());
         
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -217,7 +244,9 @@ public class teamScoresController {
 	        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+//			e.printStackTrace();
+			return new ModelAndView("/error");
 		}
 	 
 		teamInfo.addObject("gameDetails", gameDetails);

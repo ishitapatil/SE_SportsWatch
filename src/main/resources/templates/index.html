@@ -4,7 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <html xmlns:th="https://www.thymeleaf.org">
-    
+
+
 
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
    <img class="navbar-brand" src="images/nba.png" height="68" width="68" alt="SportsWatch">
@@ -15,10 +16,10 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
   
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active"> <a class="nav-link" href="/">Sports Watch <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"> <a class="nav-link"><span class="sr-only">(current)</span></a></li>
    
       <li class="nav-item active">
-        <a class="nav-link" href="/save">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/save">Sports Watch <span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="/FavTeam">Favorite Team</a>
@@ -31,14 +32,14 @@
         <a class="nav-link" href="/teamScores">Today's Team Scores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/AdminLogin">Admin Login</a>
+        <a class="nav-link" href="/adminLogin">Admin Login</a>
       </li>
       
     </ul>
       </div>
-      <button type="button" class="btn btn-primary btn-lg">
-				<a href="/login" style="color:inherit"> Login </a>
-				</button>
+ 
+  <a href="/login">Login</a>
+  <a href="/logout">Logout</a>
 </nav>  
 
 <!--- Image Slider -->
@@ -58,7 +59,9 @@
 			<div  class="carousel-caption">
 				
 				<button type="button" class="btn btn-primary btn-lg">
-				<a href="/login" style="color:inherit"> Login </a>
+			<a href="/login" style="color:inherit"> Login / Logout </a>
+				
+			
 				</button>
 			</div>
 		</div>
@@ -69,7 +72,20 @@
 	</div>
 </div>
 
-  <caption>Your Favorite Teams:</caption>
+<!--- Jumbotron -->
+<div class="container-fluid">
+	<div class="row jumbotron">
+		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+			<p class="lead">The National Basketball Association is a men's professional basketball league in North America; composed of 30 teams. It is widely considered to be the premier men's professional basketball league in the world.
+				</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+				<a href="#"><button type="button "class= "btn btn-outline-secondary btn-lg">Web Hosting</button></a>
+			</div>
+	</div>
+</div>
+  <b>						Your Favorite Teams:</b>
+  <br>
 
 <table class="table table-bordered table text-center table-dark">
   
@@ -82,6 +98,10 @@
       <td th:text="${team.abbreviation}"></td>
     </tr>
 </table>
+ <body>
  
-   
+</body>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>

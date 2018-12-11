@@ -16,7 +16,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
   
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active"> <a class="nav-link" href="/">Sports Watch <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"> <a class="nav-link" href="/save">Sports Watch <span class="sr-only">(current)</span></a></li>
    
       <li class="nav-item active">
         <a class="nav-link" href="/save">Home <span class="sr-only">(current)</span></a>
@@ -40,15 +40,19 @@
       <button type="button" class="btn btn-primary btn-lg">
 				<a href="/login" style="color:inherit"> Login </a>
 				</button>
+				<button type="button" class="btn btn-primary btn-lg">
+				<a href="/logout" style="color:inherit"> Logout </a>
+				</button>
 </nav>  
 
-    <p th:text="'Hello, ' + ${name} + '!'" />
-    
+    <!-- <p th:text="'Hello, ' + ${name} + '!'" />
+     -->
     <table class="table">
     <thead>
     <tr>
       <th scope="col">Abb</th>
       <th scope="col">Name</th>
+      <th scope="col">Logo</th>
       <th scope="col">City</th>
       <th scope="col">Rank</th>
       <th scope="col">Add to Favorites</th>
@@ -61,6 +65,8 @@
   
      		<td th:text="${teamStandingEntry.team.Abbreviation}" th:id="${teamStandingEntry.team.ID}" th:name="team">
      		<td > <a th:href="@{~/team?id=} + ${teamStandingEntry.team.ID}" th:text="${teamStandingEntry.team.Name}"> </a> </td>
+  			<td> <img th:src="@{${'/images/' + teamStandingEntry.team.Abbreviation + '.png'}}" height="85" width="88"></img> </td>
+
   			<td th:text="${teamStandingEntry.team.City}">
   			<td th:text="${teamStandingEntry.rank}">
   			<td><form th:action="@{~/addToFav}" method="POST">
@@ -68,6 +74,22 @@
   			<input type="hidden" th:value="${teamStandingEntry.team.ID}" th:name="teamid"/>
   			<input type="hidden" th:value="${teamStandingEntry.team.Name}" th:name="teamname"/>
   			<button type="submit" class="btn btn-primary btn-sm" onclick="alert('Team has been added to Favorites')" >Add to Favorite</button></form></td>		
+  			
+     		<!-- <td th:switch="${user.status}">
+    			<form th:case="Active" th:action="@{~/blockUser}" method="POST">
+  					<input type="hidden" th:value="${user.name}" th:name="uname"/>
+  					<input type="hidden" th:value="${user.email}" th:name="uemail"/>
+  					<button type="submit" class="btn btn-primary btn-sm" >Block</button>
+  				</form>
+    		
+    			<form th:case="Blocked"  th:action="@{~/unblockUser}" method="POST">
+  					<input type="hidden" th:value="${user.name}" th:name="uname"/>
+  					<input type="hidden" th:value="${user.email}" th:name="uemail"/>
+  					<button type="submit" class="btn btn-primary btn-sm" >Un-Block</button>
+  				</form>
+
+			</td>
+ -->  			
   		</tr>
  
     </table>
